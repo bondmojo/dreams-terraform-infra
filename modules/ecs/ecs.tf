@@ -186,7 +186,7 @@ EOF
 
 resource "aws_iam_role" "ecs_task_execution_role" {
   name                = "${var.name}-ecsTaskExecutionRole"
-  managed_policy_arns = ["arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy", aws_iam_policy.s3.arn, aws_iam_policy.ecr.arn, "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess"]
+  managed_policy_arns = ["arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy", aws_iam_policy.s3.arn, aws_iam_policy.ecr.arn, "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess", "arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"]
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [

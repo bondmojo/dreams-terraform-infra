@@ -3,10 +3,10 @@ resource "aws_security_group" "ecs_tasks" {
   vpc_id = var.vpc_id
 
   ingress {
-    protocol         = "-1"
-    from_port        = 0
-    to_port          = 0
-    cidr_blocks      = ["10.0.0.0/16"]
+    protocol    = "-1"
+    from_port   = 0
+    to_port     = 0
+    cidr_blocks = ["10.0.0.0/16"]
   }
 
   ingress {
@@ -46,13 +46,13 @@ resource "aws_ecs_task_definition" "main" {
       containerName = "envoy",
       condition     = "HEALTHY"
     }]
-#    healthCheck = {
-#      command     = ["CMD-SHELL", "wget --spider http://localhost:8080/admin/health || exit 1"]
-#      interval    = 100
-#      retries     = 5
-#      timeout     = 5
-#      startPeriod = 100
-#    }
+    healthCheck = {
+      command     = ["CMD-SHELL", "wget --spider http://localhost:8080/admin/health || exit 1"]
+      interval    = 100
+      retries     = 5
+      timeout     = 5
+      startPeriod = 100
+    }
     logConfiguration = {
       logDriver = "awsfirelens"
       options = {
@@ -75,11 +75,11 @@ resource "aws_ecs_task_definition" "main" {
     secrets = [
       {
         valueFrom = "arn:aws:ssm:${var.region}:${var.account_number}:parameter/CODE_COMMIT_ACCESSKEY"
-        name = "CODE_COMMIT_ACCESSKEY"
+        name      = "CODE_COMMIT_ACCESSKEY"
       },
       {
         valueFrom = "arn:aws:ssm:${var.region}:${var.account_number}:parameter/CODE_COMMIT_SECRETKEY"
-        name = "CODE_COMMIT_SECRETKEY"
+        name      = "CODE_COMMIT_SECRETKEY"
       }
     ]
     mountPoints = []
@@ -112,22 +112,22 @@ resource "aws_ecs_task_definition" "main" {
       essential: false,
       name: "xray",
       user = "1337"
-      portMappings: [
+      portMappings : [
         {
-          hostPort: 2000,
-          protocol: "udp",
-          containerPort: 2000
+          hostPort : 2000,
+          protocol : "udp",
+          containerPort : 2000
         }
       ],
-      healthCheck: {
-        retries: 3,
-        command: [
+      healthCheck : {
+        retries : 3,
+        command : [
           "CMD-SHELL",
           "timeout 1 /bin/bash -c \"</dev/udp/localhost/2000\""
         ],
-        timeout: 2,
-        interval: 5,
-        startPeriod: 10
+        timeout : 2,
+        interval : 5,
+        startPeriod : 10
       }
     },
     {
@@ -170,8 +170,8 @@ resource "aws_ecs_task_definition" "main" {
       environment = [{
         name  = "APPMESH_VIRTUAL_NODE_NAME"
         value = "mesh/${var.mesh-name}/virtualNode/${var.name}-vnode"
-      },{
-        name = "ENABLE_ENVOY_XRAY_TRACING"
+        }, {
+        name  = "ENABLE_ENVOY_XRAY_TRACING"
         value = "1"
       }]
       mountPoints = []

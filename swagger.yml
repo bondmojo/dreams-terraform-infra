@@ -4,157 +4,102 @@ info:
   version: "2021-04-14T17:00:39Z"
   title: "auth-service-gateway"
 paths:
-  /v1/graphql:
+  /v1/leads:
     post:
-      operationId: apigraphqlpost
+      operationId: apileadspost
       responses: { }
       x-amazon-apigateway-integration:
         connectionId: "${vpc-id}"
         connectionType: "VPC_LINK"
         httpMethod: "POST"
-        uri: "http://${url}/hasura/v1/graphql"
+        uri: "http://${url}/main/leads"
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
-    options:
-      operationId: mainuioptions
-      responses:
-        "200":
-          description: "200 response"
-          headers:
-            Access-Control-Allow-Origin:
-              schema:
-                type: "string"
-            Access-Control-Allow-Methods:
-              schema:
-                type: "string"
-            Access-Control-Allow-Headers:
-              schema:
-                type: "string"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Empty"
-      x-amazon-apigateway-integration:
-        type: "mock"
-        responses:
-          default:
-            statusCode: "200"
-            responseParameters:
-              method.response.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
-              method.response.header.Access-Control-Allow-Headers: "'*'"
-              method.response.header.Access-Control-Allow-Origin: "'*'"
-        requestTemplates:
-          application/json: "{\"statusCode\": 200}"
-        passthroughBehavior: "when_no_match"
-  /main/graphiql:
-    get:
-      operationId: mainuiget
+  /v1/leads/{id}/kyc:
+    post:
+      operationId: apileadskycpost
       responses: { }
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "POST"
+        uri: "http://${url}/main/leads/{id}/kyc"
+        requestParameters:
+          integration.request.path.id: "method.request.path.id"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
+  /v1/leads/{id}/additional_details:
+    post:
+      operationId: apileadsadditionaldetailspost
+      responses: { }
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "POST"
+        uri: "http://${url}/main/leads/{id}/additional_details"
+        requestParameters:
+          integration.request.path.id: "method.request.path.id"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
+  /v1/leads/{id}/payment_details:
+    post:
+      operationId: apileadspaymentdetailspost
+      responses: { }
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "POST"
+        uri: "http://${url}/main/leads/{id}/payment_details"
+        requestParameters:
+          integration.request.path.id: "method.request.path.id"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
+  /v1/leads/{id}:
+    get:
+      operationId: apileadsgetbyid
+      responses: { }
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
       x-amazon-apigateway-integration:
         connectionId: "${vpc-id}"
         connectionType: "VPC_LINK"
         httpMethod: "GET"
-        uri: "http://${url}/main/graphiql"
+        uri: "http://${url}/main/leads/{id}"
+        requestParameters:
+          integration.request.path.id: "method.request.path.id"
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
+  /v1/shufti/callback:
     post:
-      operationId: mainuipost
+      operationId: apishufticallbackpost
       responses: { }
       x-amazon-apigateway-integration:
         connectionId: "${vpc-id}"
         connectionType: "VPC_LINK"
         httpMethod: "POST"
-        uri: "http://${url}/main/graphiql"
+        uri: "http://${url}/main/shufti/callback"
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
-    options:
-      operationId: mainuioptions
-      responses:
-        "200":
-          description: "200 response"
-          headers:
-            Access-Control-Allow-Origin:
-              schema:
-                type: "string"
-            Access-Control-Allow-Methods:
-              schema:
-                type: "string"
-            Access-Control-Allow-Headers:
-              schema:
-                type: "string"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Empty"
-      x-amazon-apigateway-integration:
-        type: "mock"
-        responses:
-          default:
-            statusCode: "200"
-            responseParameters:
-              method.response.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
-              method.response.header.Access-Control-Allow-Headers: "'*'"
-              method.response.header.Access-Control-Allow-Origin: "'*'"
-        requestTemplates:
-          application/json: "{\"statusCode\": 200}"
-        passthroughBehavior: "when_no_match"
-  /main/graphql:
-    get:
-      operationId: mainget
-      responses: { }
-      x-amazon-apigateway-integration:
-        connectionId: "${vpc-id}"
-        connectionType: "VPC_LINK"
-        httpMethod: "GET"
-        uri: "http://${url}/main/graphql"
-        passthroughBehavior: "when_no_match"
-        timeoutInMillis: 29000
-        type: "http_proxy"
-    post:
-      operationId: mainpost
-      responses: { }
-      x-amazon-apigateway-integration:
-        connectionId: "${vpc-id}"
-        connectionType: "VPC_LINK"
-        httpMethod: "POST"
-        uri: "http://${url}/main/graphql"
-        passthroughBehavior: "when_no_match"
-        timeoutInMillis: 29000
-        type: "http_proxy"
-    options:
-      operationId: mainoptions
-      responses:
-        "200":
-          description: "200 response"
-          headers:
-            Access-Control-Allow-Origin:
-              schema:
-                type: "string"
-            Access-Control-Allow-Methods:
-              schema:
-                type: "string"
-            Access-Control-Allow-Headers:
-              schema:
-                type: "string"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Empty"
-      x-amazon-apigateway-integration:
-        type: "mock"
-        responses:
-          default:
-            statusCode: "200"
-            responseParameters:
-              method.response.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
-              method.response.header.Access-Control-Allow-Headers: "'*'"
-              method.response.header.Access-Control-Allow-Origin: "'*'"
-        requestTemplates:
-          application/json: "{\"statusCode\": 200}"
-        passthroughBehavior: "when_no_match"
 components:
   schemas:
     Empty:

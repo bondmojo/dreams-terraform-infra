@@ -11,23 +11,19 @@ variable "account" {
 }
 
 variable "short_name" {
-  default = "gy"
+  default = "dm"
 }
 
 variable "namespace" {
-  default = "co.gojoy"
+  default = "co.dreams"
 }
 
 variable "name" {
-  default = "gojoy-app"
+  default = "dreams-app"
 }
 
 variable "repository" {
-  default = "gojoy-service-app"
-}
-
-variable "hasura_image" {
-  default = "hasura/graphql-engine:v2.6.0"
+  default = "dreams-service-app"
 }
 
 variable "vpc_id" {
