@@ -4,7 +4,7 @@ info:
   version: "2021-04-14T17:00:39Z"
   title: "auth-service-gateway"
 paths:
-  /v1/leads:
+  /v1/dreamers:
     post:
       operationId: apileadspost
       responses: { }
@@ -12,11 +12,11 @@ paths:
         connectionId: "${vpc-id}"
         connectionType: "VPC_LINK"
         httpMethod: "POST"
-        uri: "http://${url}/main/leads"
+        uri: "http://${url}/main/dreamers"
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
-  /v1/leads/{id}/kyc:
+  /v1/dreamers/{id}/kyc:
     post:
       operationId: apileadskycpost
       responses: { }
@@ -28,13 +28,13 @@ paths:
         connectionId: "${vpc-id}"
         connectionType: "VPC_LINK"
         httpMethod: "POST"
-        uri: "http://${url}/main/leads/{id}/kyc"
+        uri: "http://${url}/main/dreamers/{id}/kyc"
         requestParameters:
           integration.request.path.id: "method.request.path.id"
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
-  /v1/leads/{id}/additional_details:
+  /v1/dreamers/{id}/additional_details:
     post:
       operationId: apileadsadditionaldetailspost
       responses: { }
@@ -46,13 +46,13 @@ paths:
         connectionId: "${vpc-id}"
         connectionType: "VPC_LINK"
         httpMethod: "POST"
-        uri: "http://${url}/main/leads/{id}/additional_details"
+        uri: "http://${url}/main/dreamers/{id}/additional_details"
         requestParameters:
           integration.request.path.id: "method.request.path.id"
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
-  /v1/leads/{id}/payment_details:
+  /v1/dreamers/{id}/payment_details:
     post:
       operationId: apileadspaymentdetailspost
       responses: { }
@@ -64,13 +64,13 @@ paths:
         connectionId: "${vpc-id}"
         connectionType: "VPC_LINK"
         httpMethod: "POST"
-        uri: "http://${url}/main/leads/{id}/payment_details"
+        uri: "http://${url}/main/dreamers/{id}/payment_details"
         requestParameters:
           integration.request.path.id: "method.request.path.id"
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
-  /v1/leads/{id}:
+  /v1/dreamers/{id}:
     get:
       operationId: apileadsgetbyid
       responses: { }
@@ -82,7 +82,7 @@ paths:
         connectionId: "${vpc-id}"
         connectionType: "VPC_LINK"
         httpMethod: "GET"
-        uri: "http://${url}/main/leads/{id}"
+        uri: "http://${url}/main/dreamers/{id}"
         requestParameters:
           integration.request.path.id: "method.request.path.id"
         passthroughBehavior: "when_no_match"
