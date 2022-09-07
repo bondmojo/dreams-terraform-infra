@@ -12,7 +12,7 @@ paths:
         connectionId: "${vpc-id}"
         connectionType: "VPC_LINK"
         httpMethod: "POST"
-        uri: "http://${url}/main/dreamers"
+        uri: "http://${url}/dreamers"
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
@@ -28,7 +28,7 @@ paths:
         connectionId: "${vpc-id}"
         connectionType: "VPC_LINK"
         httpMethod: "POST"
-        uri: "http://${url}/main/dreamers/{id}/kyc"
+        uri: "http://${url}/dreamers/{id}/kyc"
         requestParameters:
           integration.request.path.id: "method.request.path.id"
         passthroughBehavior: "when_no_match"
@@ -46,7 +46,7 @@ paths:
         connectionId: "${vpc-id}"
         connectionType: "VPC_LINK"
         httpMethod: "POST"
-        uri: "http://${url}/main/dreamers/{id}/additional_details"
+        uri: "http://${url}/dreamers/{id}/additional_details"
         requestParameters:
           integration.request.path.id: "method.request.path.id"
         passthroughBehavior: "when_no_match"
@@ -64,7 +64,7 @@ paths:
         connectionId: "${vpc-id}"
         connectionType: "VPC_LINK"
         httpMethod: "POST"
-        uri: "http://${url}/main/dreamers/{id}/payment_details"
+        uri: "http://${url}/dreamers/{id}/payment_details"
         requestParameters:
           integration.request.path.id: "method.request.path.id"
         passthroughBehavior: "when_no_match"
@@ -82,7 +82,7 @@ paths:
         connectionId: "${vpc-id}"
         connectionType: "VPC_LINK"
         httpMethod: "GET"
-        uri: "http://${url}/main/dreamers/{id}"
+        uri: "http://${url}/dreamers/{id}"
         requestParameters:
           integration.request.path.id: "method.request.path.id"
         passthroughBehavior: "when_no_match"
@@ -96,7 +96,7 @@ paths:
         connectionId: "${vpc-id}"
         connectionType: "VPC_LINK"
         httpMethod: "POST"
-        uri: "http://${url}/main/shufti/callback"
+        uri: "http://${url}/shufti/callback"
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
@@ -108,7 +108,7 @@ paths:
         connectionId: "${vpc-id}"
         connectionType: "VPC_LINK"
         httpMethod: "POST"
-        uri: "http://${url}/main/sendpulse/sendApprovalMessage"
+        uri: "http://${url}/sendpulse/sendApprovalMessage"
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
@@ -120,7 +120,7 @@ paths:
         connectionId: "${vpc-id}"
         connectionType: "VPC_LINK"
         httpMethod: "POST"
-        uri: "http://${url}/main/sendpulse/calculator"
+        uri: "http://${url}/sendpulse/calculator"
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
@@ -132,7 +132,7 @@ paths:
         connectionId: "${vpc-id}"
         connectionType: "VPC_LINK"
         httpMethod: "POST"
-        uri: "http://${url}/main/sendpulse/calculator/loan"
+        uri: "http://${url}/sendpulse/calculator/loan"
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"

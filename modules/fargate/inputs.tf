@@ -11,9 +11,8 @@ variable "subnets" {}
 variable "cluster_id" {}
 variable "task-execution-arn" {}
 variable "task-arn" {}
-variable "namespace_id" {}
-variable "mesh-name" {}
 variable "image" {}
 variable "env_variables" {
   default = []
 }
+variable "lb_target_group_id" {}

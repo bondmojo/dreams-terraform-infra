@@ -42,10 +42,6 @@ resource "aws_ecs_task_definition" "main" {
       containerPort = var.container_port
       hostPort      = var.container_port
     }]
-    dependsOn = [{
-      containerName = "envoy",
-      condition     = "HEALTHY"
-    }]
     healthCheck = {
       command     = ["CMD-SHELL", "wget --spider http://localhost:8080/admin/health || exit 1"]
       interval    = 100
@@ -96,99 +92,13 @@ resource "aws_ecs_task_definition" "main" {
           config-file-value = "/fluent-bit/configs/parse-json.conf"
         }
       }
-      dependsOn = [{
-        containerName = "envoy",
-        condition     = "HEALTHY"
-      }]
       cpu          = 0
       environment  = []
       mountPoints  = []
       volumesFrom  = []
       portMappings = []
       user         = "0"
-    },
-    {
-      image: "amazon/aws-xray-daemon",
-      essential: false,
-      name: "xray",
-      user = "1337"
-      portMappings : [
-        {
-          hostPort : 2000,
-          protocol : "udp",
-          containerPort : 2000
-        }
-      ],
-      healthCheck : {
-        retries : 3,
-        command : [
-          "CMD-SHELL",
-          "timeout 1 /bin/bash -c \"</dev/udp/localhost/2000\""
-        ],
-        timeout : 2,
-        interval : 5,
-        startPeriod : 10
-      }
-    },
-    {
-      name      = "envoy"
-      image     = "840364872350.dkr.ecr.ap-southeast-1.amazonaws.com/aws-appmesh-envoy:v1.16.1.1-prod"
-      essential = false
-      portMappings = [{
-        protocol      = "tcp"
-        containerPort = 9901
-        hostPort      = 9901
-        },
-        {
-          protocol      = "tcp"
-          containerPort = 15000
-          hostPort      = 15000
-        },
-        {
-          protocol      = "tcp"
-          containerPort = 15001
-          hostPort      = 15001
-        }
-      ]
-      healthCheck = {
-        command     = ["CMD-SHELL", "curl -s http://localhost:9901/server_info | grep state | grep -q LIVE"]
-        interval    = 5
-        retries     = 3
-        timeout     = 2
-        startPeriod = 0
-      }
-      logConfiguration = {
-        logDriver = "awsfirelens"
-        options = {
-          Port = "24224"
-          Host = "a34185698b2bf4ba9aae257122ddb7d5-40708826.ap-southeast-1.elb.amazonaws.com"
-          Name = "forward"
-        }
-      }
-      user = "1337"
-      cpu  = 0
-      environment = [{
-        name  = "APPMESH_VIRTUAL_NODE_NAME"
-        value = "mesh/${var.mesh-name}/virtualNode/${var.name}-vnode"
-        }, {
-        name  = "ENABLE_ENVOY_XRAY_TRACING"
-        value = "1"
-      }]
-      mountPoints = []
-      volumesFrom = []
-  }])
-
-  proxy_configuration {
-    type           = "APPMESH"
-    container_name = "envoy"
-    properties = {
-      AppPorts         = "8080"
-      EgressIgnoredIPs = "169.254.170.2,169.254.169.254"
-      IgnoredUID       = "1337"
-      ProxyEgressPort  = 15001
-      ProxyIngressPort = 15000
-    }
-  }
+    }])
 }
 
 resource "aws_ecs_service" "main" {
@@ -208,25 +118,14 @@ resource "aws_ecs_service" "main" {
     assign_public_ip = true
   }
 
-  service_registries {
-    registry_arn = aws_service_discovery_service.main.arn
+
+  load_balancer {
+    target_group_arn = var.lb_target_group_id
+    container_name   = "app"
+    container_port   = var.container_port
   }
 
   lifecycle {
     ignore_changes = [task_definition, desired_count]
   }
-}
-
-resource "aws_service_discovery_service" "main" {
-  name = var.name
-
-  dns_config {
-    namespace_id = var.namespace_id
-
-    dns_records {
-      ttl  = 300
-      type = "A"
-    }
-  }
-
 }
