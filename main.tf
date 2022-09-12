@@ -7,7 +7,7 @@ terraform {
   }
 }
 provider "aws" {
-  profile = "devaccess"
+  profile = "prodaccess"
   region  = var.region
 }
 
@@ -22,13 +22,14 @@ data "aws_subnet_ids" "vpc_subnet" {
 module "ecs" {
   source     = "./modules/ecs"
   name       = var.name
+  env        = var.env
   short_name = var.short_name
 }
 
 module "main-loadbalancer" {
   source = "./modules/loadbalancer"
   name = var.name
-  subnets            = data.aws_subnet_ids.vpc_subnet.ids
+  subnets            = var.vpc_subnet
   vpc_id             = data.aws_vpc.vpc.id
 }
 module "service-main" {
@@ -38,13 +39,14 @@ module "service-main" {
   repository         = var.repository
   name               = "main"
   short_name         = var.short_name
-  subnets            = data.aws_subnet_ids.vpc_subnet.ids
+  subnets            = var.vpc_subnet
   vpc_id             = data.aws_vpc.vpc.id
   cluster_id         = module.ecs.cluster-id
   task-arn           = module.ecs.task-arn
   task-execution-arn = module.ecs.task-execution-arn
   image              = "${var.account}.dkr.ecr.${var.region}.amazonaws.com/${var.repository}:latest"
   lb_target_group_id = module.main-loadbalancer.lb_target_group_id
+  depends_on         = [module.main-loadbalancer]
 }
 
 module "vpc_link" {

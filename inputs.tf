@@ -3,11 +3,11 @@ variable "region"{
 }
 
 variable "env" {
-  default = "dev"
+  default = "prod"
 }
 
 variable "account" {
-  default = "596917627629"
+  default = "987547247766"
 }
 
 variable "short_name" {
@@ -27,15 +27,15 @@ variable "repository" {
 }
 
 variable "vpc_id" {
-  default = "vpc-04c79016177929144"
+  default = "vpc-0ef7ad80aecc1861a"
 }
 
 variable "vpc_subnet" {
-  default = ["subnet-0fb70f5227a9fb003", "subnet-0b8137edef1a8fb3d"]
+  default = ["subnet-0f1fc983769a90775", "subnet-0c5743f5d15769ddb"]
 }
 
 variable "dbname" {
-  default = "sejaya-neobank-db"
+  default = "dreams-db"
 }
 
 variable "logiq" {

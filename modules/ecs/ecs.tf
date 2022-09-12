@@ -1,5 +1,5 @@
 resource "aws_ecs_cluster" "main" {
-  name = "${var.name}-cluster"
+  name = "${var.name}-${var.env}-cluster"
 }
 resource "aws_iam_role" "ecs_task_role" {
   name                = "${var.name}-ecsTaskRole"

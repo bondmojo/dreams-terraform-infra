@@ -69,14 +69,7 @@ resource "aws_ecs_task_definition" "main" {
     cpu         = 0
     environment = var.env_variables
     secrets = [
-      {
-        valueFrom = "arn:aws:ssm:${var.region}:${var.account_number}:parameter/CODE_COMMIT_ACCESSKEY"
-        name      = "CODE_COMMIT_ACCESSKEY"
-      },
-      {
-        valueFrom = "arn:aws:ssm:${var.region}:${var.account_number}:parameter/CODE_COMMIT_SECRETKEY"
-        name      = "CODE_COMMIT_SECRETKEY"
-      }
+
     ]
     mountPoints = []
     volumesFrom = []
