@@ -148,6 +148,30 @@ paths:
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
+  /v1/client:
+    post:
+      operationId: apiforlmsclients
+      responses: { }
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "POST"
+        uri: "http://${url}/client"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
+  /v1/loan:
+    post:
+      operationId: apiforclientloans
+      responses: { }
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "POST"
+        uri: "http://${url}/loan"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
 components:
   schemas:
     Empty:
