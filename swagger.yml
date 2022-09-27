@@ -216,7 +216,7 @@ paths:
         httpMethod: "GET"
         uri: "http://${url}/global/CalculateWingWeiLuyTransferFee/{amount}"
         requestParameters:
-          integration.request.path.id: "method.request.path.amount"
+          integration.request.path.amount: "method.request.path.amount"
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
