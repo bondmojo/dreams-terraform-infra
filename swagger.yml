@@ -220,6 +220,24 @@ paths:
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
+  /v1/loan/runCronApis/{id}:
+    get:
+      operationId: apitoruncron
+      responses: { }
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "GET"
+        uri: "http://${url}/loan/runCronApis/{id}"
+        requestParameters:
+          integration.request.path.id: "method.request.path.id"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
 components:
   schemas:
     Empty:
