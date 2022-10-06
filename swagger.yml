@@ -136,6 +136,96 @@ paths:
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
+  /v1/client:
+    post:
+      operationId: apiforlmsclients
+      responses: { }
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "POST"
+        uri: "http://${url}/client"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
+  /v1/loan:
+    post:
+      operationId: apiforclientloans
+      responses: { }
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "POST"
+        uri: "http://${url}/loan"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
+  /v1/loan/{id}:
+    get:
+      operationId: apigetloanbyid
+      responses: { }
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "GET"
+        uri: "http://${url}/loan/{id}"
+        requestParameters:
+          integration.request.path.id: "method.request.path.id"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
+  /v1/loan/disbursed:
+    post:
+      operationId: apitodisburseloan
+      responses: { }
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "POST"
+        uri: "http://${url}/loan/disbursed"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
+  /v1/global/CalculateWingWeiLuyTransferFee/{amount}:
+    get:
+      operationId: apitocalculatetransferfee
+      responses: { }
+      parameters:
+        - name: "amount"
+          in: "path"
+          required: true
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "GET"
+        uri: "http://${url}/global/CalculateWingWeiLuyTransferFee/{amount}"
+        requestParameters:
+          integration.request.path.amount: "method.request.path.amount"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
+  /v1/loan/runCronApis/{id}:
+    get:
+      operationId: apitoruncron
+      responses: { }
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "GET"
+        uri: "http://${url}/loan/runCronApis/{id}"
+        requestParameters:
+          integration.request.path.id: "method.request.path.id"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
 components:
   schemas:
     Empty:
