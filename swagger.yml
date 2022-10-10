@@ -202,6 +202,30 @@ paths:
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
+  /v1/loan/repayment/transaction/create:
+    post:
+      operationId: loanrepaymentapi
+      responses: { }
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "POST"
+        uri: "http://${url}/loan/repayment/transaction/create"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
+  /v1/dreamers/:sendpulse_id/create_payment_recieved_task/:
+    post:
+      operationId: taskcreationzoho
+      responses: { }
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "POST"
+        uri: "http://${url}/:sendpulse_id/create_payment_recieved_task/"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
   /v1/global/CalculateWingWeiLuyTransferFee/{amount}:
     get:
       operationId: apitocalculatetransferfee
@@ -235,6 +259,18 @@ paths:
         uri: "http://${url}/loan/runCronApis/{id}"
         requestParameters:
           integration.request.path.id: "method.request.path.id"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
+  /v1/files/upload:
+    post:
+      operationId: paymentfileupload
+      responses: { }
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "POST"
+        uri: "http://${url}/files/upload"
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
