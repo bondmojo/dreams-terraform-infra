@@ -148,6 +148,18 @@ paths:
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
+  /v1/sendpulse/runFlowV1:
+    post:
+      operationId: runsendpulseflow
+      responses: { }
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "POST"
+        uri: "http://${url}/sendpulse/runFlowV1"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
   /v1/client:
     post:
       operationId: apiforlmsclients
@@ -157,6 +169,42 @@ paths:
         connectionType: "VPC_LINK"
         httpMethod: "POST"
         uri: "http://${url}/client"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
+  /v1/client/{id}:
+    get:
+      operationId: apigetclientbyid
+      responses: { }
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "GET"
+        uri: "http://${url}/client/{id}"
+        requestParameters:
+          integration.request.path.id: "method.request.path.id"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
+  /v1/client/{id}/contracturl:
+    get:
+      operationId: createcontracturl
+      responses: { }
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "GET"
+        uri: "http://${url}/client/{id}/contracturl"
+        requestParameters:
+          integration.request.path.id: "method.request.path.id"
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
@@ -202,6 +250,42 @@ paths:
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
+  /v1/dreamers/{id}/create_payment_recieved_task:
+    post:
+      operationId: apitocreatepaymenttask
+      responses: { }
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "POST"
+        uri: "http://${url}/dreamers/{id}/create_payment_recieved_task"
+        requestParameters:
+          integration.request.path.id: "method.request.path.id"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
+  /v1/dreamers/{id}/create_ticket:
+    post:
+      operationId: apitocreategenerictask
+      responses: { }
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "POST"
+        uri: "http://${url}/dreamers/{id}/create_ticket"
+        requestParameters:
+          integration.request.path.id: "method.request.path.id"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
   /v1/loan/repayment/transaction/create:
     post:
       operationId: loanrepaymentapi
@@ -211,18 +295,6 @@ paths:
         connectionType: "VPC_LINK"
         httpMethod: "POST"
         uri: "http://${url}/loan/repayment/transaction/create"
-        passthroughBehavior: "when_no_match"
-        timeoutInMillis: 29000
-        type: "http_proxy"
-  /v1/dreamers/:sendpulse_id/create_payment_recieved_task/:
-    post:
-      operationId: taskcreationzoho
-      responses: { }
-      x-amazon-apigateway-integration:
-        connectionId: "${vpc-id}"
-        connectionType: "VPC_LINK"
-        httpMethod: "POST"
-        uri: "http://${url}/:sendpulse_id/create_payment_recieved_task/"
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
