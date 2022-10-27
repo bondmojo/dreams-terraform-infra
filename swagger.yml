@@ -148,6 +148,42 @@ paths:
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
+  /v1/sendpulse/convertToRomanNumber/{id}:
+    get:
+      operationId: romannumberconveter
+      responses: { }
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "GET"
+        uri: "http://${url}/sendpulse/convertToRomanNumber/{id}"
+        requestParameters:
+          integration.request.path.id: "method.request.path.id"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
+  /v1/sendpulse/convertToKhmerNumber/{id}:
+    get:
+      operationId: khmernumberconveter
+      responses: { }
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "GET"
+        uri: "http://${url}/sendpulse/convertToKhmerNumber/{id}"
+        requestParameters:
+          integration.request.path.id: "method.request.path.id"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
   /v1/sendpulse/runFlowV1:
     post:
       operationId: runsendpulseflow
