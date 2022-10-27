@@ -381,7 +381,7 @@ paths:
               properties:
                 file:
                   type: string
-                  format: base64
+                  format: binary
       responses: { }
       x-amazon-apigateway-integration:
         connectionId: "${vpc-id}"

@@ -3,7 +3,7 @@ resource "aws_ecs_cluster" "main" {
 }
 resource "aws_iam_role" "ecs_task_role" {
   name                = "${var.name}-ecsTaskRole"
-  managed_policy_arns = [aws_iam_policy.cognito.arn, aws_iam_policy.invoke_lambda.arn, aws_iam_policy.app-mesh-envoy.arn, aws_iam_policy.xray.arn, "arn:aws:iam::aws:policy/AWSCodeCommitPowerUser", "arn:aws:iam::aws:policy/AmazonKinesisFullAccess", "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess", "arn:aws:iam::aws:policy/CloudWatchFullAccess"]
+  managed_policy_arns = [aws_iam_policy.cognito.arn, aws_iam_policy.invoke_lambda.arn, aws_iam_policy.app-mesh-envoy.arn, aws_iam_policy.xray.arn, "arn:aws:iam::aws:policy/AWSCodeCommitPowerUser", "arn:aws:iam::aws:policy/AmazonKinesisFullAccess", "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess", "arn:aws:iam::aws:policy/CloudWatchFullAccess", "arn:aws:iam::aws:policy/AmazonS3FullAccess"]
   assume_role_policy  = <<EOF
 {
  "Version": "2012-10-17",
