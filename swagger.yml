@@ -286,6 +286,30 @@ paths:
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
+  /v1/loan/status:
+    post:
+      operationId: apitoupdateloanstatus
+      responses: { }
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "POST"
+        uri: "http://${url}/loan/status"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
+  /v1/loan/videoReceivedCallback:
+    post:
+      operationId: videoreceivecallackfromsendpulse
+      responses: { }
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "POST"
+        uri: "http://${url}/loan/videoReceivedCallback"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"  
   /v1/dreamers/{id}/create_payment_recieved_task:
     post:
       operationId: apitocreatepaymenttask
