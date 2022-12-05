@@ -394,6 +394,18 @@ paths:
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
+  /v1/loan/runHandlePaymentDueLoansCron:
+   post:
+      operationId: loanrepaymentapi
+      responses: { }
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "POST"
+        uri: "http://${url}/loan/runHandlePaymentDueLoansCron"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
   /v1/files/uploadPaymentReceipt:
     post:
       operationId: paymentfileupload
@@ -414,7 +426,7 @@ paths:
         uri: "http://${url}/files/uploadPaymentReceipt"
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
-        type: "http_proxy"
+        type: "http_proxy"        
 components:
   schemas:
     Empty:
