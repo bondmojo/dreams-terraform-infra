@@ -414,7 +414,7 @@ paths:
         connectionId: "${vpc-id}"
         connectionType: "VPC_LINK"
         httpMethod: "POST"
-        uri: "http://${url}/loan/runHandlePaymentDueLoansCron"
+        uri: "http://${url}/loan/updateRepaymentDate"
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
