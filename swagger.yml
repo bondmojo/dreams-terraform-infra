@@ -100,18 +100,6 @@ paths:
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
-  /v1/sendpulse/sendApprovalMessage:
-    post:
-      operationId: apisenpulseapprovalpost
-      responses: { }
-      x-amazon-apigateway-integration:
-        connectionId: "${vpc-id}"
-        connectionType: "VPC_LINK"
-        httpMethod: "POST"
-        uri: "http://${url}/sendpulse/sendApprovalMessage"
-        passthroughBehavior: "when_no_match"
-        timeoutInMillis: 29000
-        type: "http_proxy"
   /v1/sendpulse/updateApplicationStatus:
     post:
       operationId: apitoupdateapprovalstatus
@@ -196,6 +184,18 @@ paths:
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
+  /v1/sendpulse/getRepaymentScheduleMessage:
+    post:
+      operationId: runsendpulseflow
+      responses: { }
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "POST"
+        uri: "http://${url}/sendpulse/getRepaymentScheduleMessage"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
   /v1/client:
     post:
       operationId: apiforlmsclients
@@ -241,6 +241,18 @@ paths:
         uri: "http://${url}/client/{id}/contracturl"
         requestParameters:
           integration.request.path.id: "method.request.path.id"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
+  /v1/client/dreamPoint/refund:
+    post:
+      operationId: dreampointrefundapi
+      responses: { }
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "POST"
+        uri: "http://${url}/client/dreamPoint/refund"
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
@@ -397,33 +409,15 @@ paths:
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
-  /v1/repayment_schedule:
+  /v1/repaymentSchedule/get/instalment:
    post:
-      operationId: createrepaymentschedule
+      operationId: apitogetinstalment
       responses: { }
       x-amazon-apigateway-integration:
         connectionId: "${vpc-id}"
         connectionType: "VPC_LINK"
         httpMethod: "POST"
-        uri: "http://${url}/repayment_schedule"
-        passthroughBehavior: "when_no_match"
-        timeoutInMillis: 29000
-        type: "http_proxy"
-  /v1/zoho/tasks/{dreamer_id}/create_payment_recieved_task:
-    post:
-      operationId: apitocreatepaymenttask
-      responses: { }
-      parameters:
-        - name: "dreamer_id"
-          in: "path"
-          required: true
-      x-amazon-apigateway-integration:
-        connectionId: "${vpc-id}"
-        connectionType: "VPC_LINK"
-        httpMethod: "POST"
-        uri: "http://${url}/zoho/tasks/{dreamer_id}/create_payment_recieved_task"
-        requestParameters:
-          integration.request.path.dreamer_id: "method.request.path.dreamer_id"
+        uri: "http://${url}/repaymentSchedule/get/instalment"
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
