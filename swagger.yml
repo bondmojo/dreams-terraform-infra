@@ -433,6 +433,24 @@ paths:
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
+  /v1/repaymentSchedule/{loan_id}/paymentPlanMsg:
+    get:
+      operationId: apitogetpaymentplanmessage
+      responses: { }
+      parameters:
+        - name: "loan_id"
+          in: "path"
+          required: true
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "GET"
+        uri: "http://${url}/repaymentSchedule/{loan_id}/paymentPlanMsg"
+        requestParameters:
+          integration.request.path.loan_id: "method.request.path.loan_id"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
   /v1/zoho/tasks/{dreamer_id}/create_ticket:
     post:
       operationId: apitocreategenerictask
@@ -514,6 +532,18 @@ paths:
         connectionType: "VPC_LINK"
         httpMethod: "POST"
         uri: "http://${url}/telegram/sendSelectTenureKeyboard"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        type: "http_proxy"
+  /v1/telegram/sendCustomKeyboardMessage:
+   post:
+      operationId: sendCustomKeyboardMessageapi
+      responses: { }
+      x-amazon-apigateway-integration:
+        connectionId: "${vpc-id}"
+        connectionType: "VPC_LINK"
+        httpMethod: "POST"
+        uri: "http://${url}/telegram/sendCustomKeyboardMessage"
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
         type: "http_proxy"
